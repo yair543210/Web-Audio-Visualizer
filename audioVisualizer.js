@@ -16,8 +16,7 @@ let backgroundColors = ["black", "red", "blue"];
 
 function initAudio() {
     html = document.getElementsByTagName("HTML")[0];
-    body = document.getElementsByTagName("BODY")[0];    
-    console.log(body)
+    body = document.getElementsByTagName("BODY")[0];        
     body.style.backgroundColor = backgroundColors[currentSongIndex];        
     html.style.backgroundColor = backgroundColors[currentSongIndex];        
     audio = new Audio();
@@ -37,6 +36,7 @@ function addSoundControlsEventListeners() {
     addPlayButtonListener();
     addNextButtonEventListener();
     addPrevButtonEventListener();
+    addAudioEndedEventListener();
 }
 
 function addPlayButtonListener() {
@@ -47,7 +47,7 @@ function addPlayButtonListener() {
             playButton.classList.add("stop");
             playButton.classList.remove("play");
             audioContext.resume();
-            audio.play();
+            audio.play();            
             animationLoop();
         } else { //stop                     
             frequency_array = new Uint8Array(analyser.frequencyBinCount);                        
@@ -62,20 +62,7 @@ function addPlayButtonListener() {
 
 function addNextButtonEventListener() {
     nextButton = document.querySelector('.next');
-    nextButton.addEventListener("click", () => {
-        currentSongIndex++;
-
-        if (currentSongIndex >= songs.length) {
-            currentSongIndex = 0;
-        }
-        body.style.backgroundColor = backgroundColors[currentSongIndex];        
-        html.style.backgroundColor = backgroundColors[currentSongIndex];        
-        audio.src = "./mp3/" + songs[currentSongIndex] + ".mp3";
-        songTitleDisplay.innerHTML = "Song Name: " + songs[currentSongIndex];
-        playButton.innerHTML = "Play";
-        playButton.classList.add("play");
-        playButton.classList.remove("pause");
-    })
+    nextButton.addEventListener("click",goToNextSong)
 }
 
 function addPrevButtonEventListener() {
@@ -93,6 +80,26 @@ function addPrevButtonEventListener() {
         playButton.classList.add("play");
         playButton.classList.remove("pause");
     })
+}
+
+function addAudioEndedEventListener(){
+    audio.onended = ()=>{
+        goToNextSong();
+    }
+}
+
+function goToNextSong(){
+    currentSongIndex++;
+        if (currentSongIndex >= songs.length) {
+            currentSongIndex = 0;
+        }
+        body.style.backgroundColor = backgroundColors[currentSongIndex];        
+        html.style.backgroundColor = backgroundColors[currentSongIndex];        
+        audio.src = "./mp3/" + songs[currentSongIndex] + ".mp3";
+        songTitleDisplay.innerHTML = "Song Name: " + songs[currentSongIndex];
+        playButton.innerHTML = "Play";
+        playButton.classList.add("play");
+        playButton.classList.remove("pause");
 }
 
 function animationLoop() {

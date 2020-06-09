@@ -11,7 +11,8 @@ let songs = [
 ];
 let currentSongIndex = 0;
 
-let backgroundColors = ["black", "red", "blue"];
+let backgroundColors = ["black", "#8f0000", "#00006B"];
+let strokeColors = ["#a9ccee","#E3E3E3", "ffffff"];
 
 
 function initAudio() {
@@ -145,7 +146,8 @@ function drawBars(amountOfBars) {
 function drawSingleBar(x1, y1, x2, y2, width, frequency) {
     ctx.lineWidth = width;
     ctx.beginPath();
-    ctx.strokeStyle = "#a9ccee";
+    // ctx.strokeStyle = "#a9ccee";
+    ctx.strokeStyle = strokeColors[currentSongIndex];
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.shadowBlur = 0;

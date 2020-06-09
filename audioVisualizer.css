@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    padding: 0;     
+}
+
+html, body{
+    overflow: hidden;
+    background-color: black;
+    transition: 0.7s background-color;
+}
+
+.container{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);        
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;    
+    width: 50%;
+}
+.buttons{        
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;    
+    margin: 5px;
+    
+}
+.button{        
+    padding:20px;
+    /* width: 7%; */
+    background-color: transparent;
+    cursor: pointer;    
+    visibility: visible;    
+    opacity: 1;
+    transition: opacity .7s linear;
+    border: 1px solid #a9ccee;
+    color:#a9ccee;
+    margin: 0 10px;
+}
+
+.songTitle{
+    color: #a9ccee;
+    font-size: small;
+    display: inline-block;        
+    width: 25ch;
+    text-align: center;    
+}
